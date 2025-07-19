@@ -1,0 +1,528 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body::after {
+    display: none !important;
+}
+
+.screen {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* شاشة البداية */
+.splash-content {
+    margin: auto;
+    text-align: center;
+    animation: fadeIn 1s ease;
+}
+
+.splash-content h1 {
+    font-size: 3rem;
+    color: #00ffaa;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 255, 170, 0.5);
+}
+
+.splash-content p {
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: #00ffaa;
+    border-radius: 50%;
+    animation: bounce 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* واجهة المحادثة */
+.header {
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    font-size: 0.8rem;
+    color: #00ffaa;
+}
+
+.active-users {
+    color: #00ffaa;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 15px;
+    border-radius: 18px;
+    line-height: 1.4;
+    animation: fadeIn 0.3s ease;
+}
+
+.bot-message {
+    background-color: #222;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.user-message {
+    background-color: #0066ff;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.typing-indicator {
+    display: inline-flex;
+    gap: 5px;
+    padding-left: 10px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #aaa;
+    border-radius: 50%;
+    animation: typingPulse 1.5s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.input-area {
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: none;
+    background-color: #222;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.btn-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    background-color: #0066ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0055dd;
+    transform: scale(1.02);
+}
+
+.btn-yes {
+    background-color: #00aa55;
+}
+
+.btn-no {
+    background-color: #ff3333;
+}
+
+.btn-diamond {
+    background-color: #9933ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.progress-step {
+    background-color: #222;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-step::before {
+    content: "⏳";
+    font-size: 1.2rem;
+}
+
+.progress-step.completed::before {
+    content: "✓";
+    color: #00ffaa;
+}
+
+.progress-step.failed::before {
+    content: "✗";
+    color: #ff3333;
+}
+
+.error-message {
+    color: #ff3333;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #222;
+    border-radius: 10px;
+    margin: 10px 0;
+    position: relative;
+    height: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0066ff, #00ffaa);
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    color: white;
+}
+
+/* صفحة العروض المعدلة */
+.offer-content {
+    max-width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.discount-banner {
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.1);
+}
+
+.discount-text {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.discount-timer {
+    font-size: 0.9rem;
+    color: white;
+}
+
+.verification-box {
+    background-color: #222;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.verification-box h2 {
+    color: #00ffaa;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.verification-steps {
+    margin-top: 10px;
+}
+
+.step {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    padding-right: 10px;
+}
+
+.countdown-box {
+    background-color: #333;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.countdown-text {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.countdown-timer {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-top: 5px;
+}
+
+.tasks-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #00ffaa;
+}
+
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.task-card {
+    display: flex;
+    align-items: center;
+    background-color: #222;
+    border-radius: 10px;
+    padding: 12px;
+    gap: 12px;
+}
+
+.task-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.task-details {
+    flex-grow: 1;
+}
+
+.task-details h3 {
+    font-size: 1rem;
+    margin-bottom: 3px;
+}
+
+.task-details p {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.task-btn {
+    background-color: #9933ff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* زر CTA معدل للهاتف */
+.cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    margin-top: 10px;
+    background-color: #00aa55;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-btn:hover {
+    background-color: #009944;
+    transform: scale(1.02);
+}
+
+.btn-icon {
+    font-size: 1.4rem;
+}
+
+.btn-text {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.btn-arrow {
+    font-size: 1.4rem;
+}
+
+/* الإشعارات */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0066ff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    animation: slideUp 0.5s ease, fadeOut 0.5s ease 3s forwards;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    font-size: 1.5rem;
+}
+
+.flash-notification {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #ff3366, #ff6633);
+    padding: 10px 20px;
+    border-radius: 30px;
+    animation: pulse 2s infinite;
+    z-index: 1000;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(255,0,0,0.3);
+}
+
+/* الرسوم المتحركة */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes typingPulse {
+    0%, 100% { opacity: 0.4; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes slideUp {
+    from { bottom: -50px; opacity: 0; }
+    to { bottom: 20px; opacity: 1; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; }
+}
+
+@keyframes pulse {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* تعديلات للشاشات الصغيرة */
+@media (max-width: 400px) {
+    .discount-text {
+        font-size: 0.9rem;
+    }
+    
+    .task-card {
+        flex-wrap: wrap;
+    }
+    
+    .task-btn {
+        width: 100%;
+    }
+    
+    .verification-box h2 {
+        font-size: 1.1rem;
+    }
+    
+    .countdown-timer {
+        font-size: 1.5rem;
+    }
+}
